@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/dikamjit-borah/PetsBarnacle#readme",
   "dependencies": {
+    "csv-parser": "^3.0.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mongodb": "^4.9.0",
