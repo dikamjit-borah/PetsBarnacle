@@ -1,7 +1,7 @@
 const csv = require('csv-parser')
 const fs = require('fs')
 const path = require('path');
-const csvPath = path.join(__dirname, 'pet_data.csv');
+const csvPath = path.join(__dirname, '../data/pet_data.csv');
 const results = [];
 
 module.exports = {
