@@ -10,10 +10,12 @@ module.exports = getMongoDbInstance = async function () {
     let _mongoDbInstance
     try {
         if (!_mongoDbInstance) {
-            ;
-            mongoose.connect(process.env.MONGODB_URL)
+            mongoose.connect(process.env.MONGODB_URL, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            })
             _mongoDbInstance = mongoose.connection;
-            _mongoDbInstance.on('error', (error) => {
+            _mongoDbInstance.on('errsor', (error) => {
                 console.log(error);
                 basicUtils.logger(TAG, constants.messages.MONGO_CONN_ERR)
             })
