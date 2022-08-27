@@ -1,9 +1,13 @@
-const csvParser = require('csv-parser');
+const TAG = "controller.pet.js"
+
 const csvParse = require('../modules/csv/csv.parse');
+const basicUtils = require('../utils/basic.utils')
 
 module.exports = {
     add: async (req, res) => {
         //res.send("add")
+        //basicUtils.logger(TAG, `${req}`)
+        console.log(req.originalUrl);
         res.send(await csvParse.parseCsv())
     },
 

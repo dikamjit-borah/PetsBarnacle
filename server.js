@@ -9,7 +9,7 @@ const port = process.env.PORT || 5052;
 app.use(express.json())
 app.use('/api/pet', routesPet)
 
-//const mongoDbConnection = require('./modules/mongodb/mongodb.connect')
+const mongoDbConnection = require('./modules/mongodb/mongodb.connect')()
 
 app.listen(port, () => {
     console.log(TAG, `PetBarnacle running on port ${port}`)
