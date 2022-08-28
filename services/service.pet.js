@@ -48,7 +48,7 @@ module.exports = {
         let data
         let err
         try {
-            data = await modelPet.find({petId})
+            data = await modelPet.find({ petId })
         } catch (error) {
             console.log(error);
             err = "" + error
@@ -57,7 +57,24 @@ module.exports = {
             data,
             err
         }
+    },
 
-
+    updateOneInPetCollection: async (petId) => {
+        let isMatched = false
+        let isUpdated = false
+        let err
+        try {
+            result = await modelPet.updateOne({ petId }, {breed: "faaaaaaaaaadadad"})
+            isMatched = result && result.matchedCount ? true : false
+            isUpdated = result && result.modifiedCount ? true : false
+        } catch (error) {
+            console.log(error);
+            err = "" + error
+        }
+        return {
+            isMatched,
+            isUpdated,
+            err
+        }
     }
 }

@@ -51,15 +51,14 @@ module.exports = {
     viewPet: async (req, res) => {
         basicUtils.logger(TAG, `Hitting ${req.originalUrl}`)
         const petId = req.params.id && req.params.id != "0" && !isNaN(req.params.id) ? req.params.id : ""
-        console.log(petId);
-        if (!petId) return basicUtils.generateResponse(res, httpStatus.BAD_REQUEST, constants.messages.VIEW_PET_INVALID_ID)
+        if (!petId) return basicUtils.generateResponse(res, httpStatus.BAD_REQUEST, constants.messages.PET_INVALID_ID)
         if (global.mongoDbConnection && petId) {
             try {
                 const result = await servicePet.fetchOneFromPetCollection(petId)
                 if (result) {
                     if (result.err) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.VIEW_PET_ERR, { error: result.err })
                     if (result.data && result.data.length > 0) return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.VIEW_PET_SUCCESS, { petDetails: result.data })
-                    else return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.VIEW_PET_EMPTY)
+                    else return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.PET_EMPTY_ID)
                 }
             } catch (error) {
                 return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.VIEW_PET_ERR, { error: "" + error })
@@ -68,8 +67,23 @@ module.exports = {
         else basicUtils.generateResponse(res, httpStatus.BAD_GATEWAY, constants.messages.DB_DOWN)
     },
 
-    updatePet: (req, res) => {
-        res.send("updatePet")
+    updatePet: async (req, res) => {
+        basicUtils.logger(TAG, `Hitting ${req.originalUrl}`)
+        const petId = req.params.id && req.params.id != "0" && !isNaN(req.params.id) ? req.params.id : ""
+        if (!petId) return basicUtils.generateResponse(res, httpStatus.BAD_REQUEST, constants.messages.PET_INVALID_ID)
+        if (global.mongoDbConnection && petId) {
+            try {
+                const result = await servicePet.updateOneInPetCollection(petId)
+                if (result) {
+                    if (result.err) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.UPDATE_PET_ERR, { error: result.err })
+                    if (!result.isMatched) return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.PET_EMPTY_ID)
+                    return (result.isUpdated) ? basicUtils.generateResponse(res, httpStatus.OK, `${constants.messages.UPDATE_PET_SUCCESS} for pet id ${petId}`) : basicUtils.generateResponse(res, httpStatus.OK, constants.messages.UPDATE_PET_NONE)
+                }
+            } catch (error) {
+                return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.UPDATE_PET_ERR, { error: "" + error })
+            }
+        }
+        else basicUtils.generateResponse(res, httpStatus.BAD_GATEWAY, constants.messages.DB_DOWN)
     },
 
     deletePet: (req, res) => {

@@ -19,8 +19,12 @@ module.exports = {
 
         VIEW_PET_ERR: "Error fetching pet details",
         VIEW_PET_SUCCESS: "Successfully fetched pet details",
-        VIEW_PET_EMPTY: "No record found for the given pet id",
-        VIEW_PET_INVALID_ID: "Cannot search database for invalid pet id"
 
+        UPDATE_PET_ERR: "Error updating pet details",
+        UPDATE_PET_SUCCESS: "Successfully updated details",
+        UPDATE_PET_NONE: "Cannot update pet details with same data",
+
+        PET_EMPTY_ID: "No record found for the given pet id",
+        PET_INVALID_ID: "Please provide a valid pet id",
     }
 }
