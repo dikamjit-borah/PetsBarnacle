@@ -1,13 +1,13 @@
 # PetsBarnacle
 
 ## Tech Stack
-Node.js
-Express.js
-Mongoose
-csv-parser
+Node.js <br>
+Express.js <br>
+Mongoose <br>
+csv-parser <br>
 
 ## Deployment
-Node.js application is deployed on **Heroku**
+Node.js application is deployed on **Heroku** <br>
 **MongoDB Atlas** is used as a MongoDB database-as-a-service
 
 ## Apis
@@ -15,7 +15,7 @@ The application has 5 necessary endpoints
 
 ### A POST route “/api/pet” to add pets from an excel file
 
-**POST** /api/pet/add
+**POST** /api/pet/add <br>
 **HOST** petsbarnacle.herokuapp.com
 
 #### example call & sample response
@@ -31,7 +31,7 @@ https://petsbarnacle.herokuapp.com/api/pet/add
 
 ### A GET route “/api/pet” to get all the pets in the database
 
-**GET** /api/pet/viewAll
+**GET** /api/pet/viewAll <br>
 **HOST** petsbarnacle.herokuapp.com
 
 #### example call & sample response
