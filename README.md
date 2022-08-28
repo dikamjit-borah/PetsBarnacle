@@ -65,13 +65,76 @@ https://petsbarnacle.herokuapp.com/api/pet/viewAll
 }
 ```
 
-
-
-
-
-
-
 ### A GET route “/api/pet/<petId>” to get a specific pet (petId will be a dynamic value eg. /api/pet/abc123)
+
+**GET** /api/pet/view/:id <br>
+**PARAMS** id
+**HOST** petsbarnacle.herokuapp.com
+
+#### example call & sample response
+```
+https://petsbarnacle.herokuapp.com/api/pet/view/2
+```
+```
+{
+    "statusCode": 200,
+    "message": "Successfully fetched pet details",
+    "data": {
+        "petDetails": [
+            {
+                "_id": "630b6991352a17a1772ab8c7",
+                "petId": 2,
+                "age": 2,
+                "breed": "Breed2",
+                "name": "Name2",
+                "type": "Type2"
+            }
+        ]
+    }
+}
+```
 ### A PATCH route “/api/pet/<petId>” to update the details of a specific pet
+
+**PATCH** /api/pet/update/:id <br>
+**PARAMS** id
+**HOST** petsbarnacle.herokuapp.com
+
+#### example call & sample response
+```
+https://petsbarnacle.herokuapp.com/api/pet/view/3
+```
+```
+{
+    "statusCode": 200,
+    "message": "Successfully updated details for pet id 3"
+}
+```
 ### A DELETE route “/api/pet/<petId>” to delete a specific pet
+
+**DELETE** /api/pet/delete/:id <br>
+**PARAMS** id
+**HOST** petsbarnacle.herokuapp.com
+
+#### example call & sample response
+```
+https://petsbarnacle.herokuapp.com/api/pet/delete/13
+```
+```
+{
+    "statusCode": 200,
+    "message": "Successfully deleted pet"
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
