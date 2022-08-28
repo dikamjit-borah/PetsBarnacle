@@ -12,12 +12,16 @@ module.exports = {
         if (global.mongoDbConnection) {
             try {
                 let petData = await csvParse.parseCsv()
-                const result = await servicePet.insertManyIntoPetsCollection(petData)
-                if (result) {
-                    if (result.err) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ADD_PET_ERR, { error: result.err })
-                    if (result.upserted) return basicUtils.generateResponse(res, httpStatus.OK, `${constants.messages.ADD_PET_SUCCESS} with ${result.upserted} records`)
-                    else return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.ADD_PET_NONE)
-                }
+                if (petData.err) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ADD_PET_ERR, { error: petData.err })
+                if (petData.parsedCsvData && petData.parsedCsvData.length > 0) {
+                    const result = await servicePet.insertManyIntoPetsCollection(petData.parsedCsvData)
+                    if (result) {
+                        if (result.err) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ADD_PET_ERR, { error: result.err })
+                        if (result.upserted) return basicUtils.generateResponse(res, httpStatus.OK, `${constants.messages.ADD_PET_SUCCESS} with ${result.upserted} records`)
+                        else return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.ADD_PET_UPDATED)
+                    }
+                } else return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.ADD_PET_EMPTY)
+
 
             } catch (error) {
                 return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ADD_PET_NONE, { error: "" + error })
