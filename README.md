@@ -96,7 +96,8 @@ https://petsbarnacle.herokuapp.com/api/pet/view/2
 ### A PATCH route “/api/pet/<petId>” to update the details of a specific pet
 
 **PATCH** /api/pet/update/:id <br>
-**PARAMS** id
+**PARAMS** id <br>
+**BODY** name, type, breed, age (at least one field is necessary to update details)
 **HOST** petsbarnacle.herokuapp.com
 
 #### example call & sample response
