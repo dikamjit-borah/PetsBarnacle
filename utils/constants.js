@@ -2,7 +2,8 @@ module.exports={
     messages: {
 
         SMTHNG_WRNG: "Something went wrong. Please try again",
-        
+        DB_DOWN: "Database is not connected. Please try after sometime",
+
         MONGO_CONN_READY: "Connection to cloud atlas ready",
         MONGO_CONN_SUCCESS: "Connection to cloud atlas established successfully",
         MONGO_CONN_FAIL: "Connection to cloud atlas could not be established",
