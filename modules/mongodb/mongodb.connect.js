@@ -15,7 +15,7 @@ module.exports = getMongoDbInstance = async function () {
                 useUnifiedTopology: true,
             })
             _mongoDbInstance = mongoose.connection;
-            _mongoDbInstance.on('errsor', (error) => {
+            _mongoDbInstance.on('error', (error) => {
                 console.log(error);
                 basicUtils.logger(TAG, constants.messages.MONGO_CONN_ERR)
             })

@@ -5,7 +5,7 @@ const constants = require("./constants");
 
 module.exports = {
     logDatetime: function(){
-        return moment(new Date()).format('DD MM YYYY')
+        return moment(new Date()).format('DD-MM-YYYY HH:mm:ss')
     },
 
     logger: function(TAG, message){
