@@ -31,8 +31,21 @@ module.exports = {
         else basicUtils.generateResponse(res, httpStatus.BAD_GATEWAY, constants.messages.DB_DOWN)
     },
 
-    viewAll: (req, res) => {
-        res.send("viewAll")
+    viewAll: async (req, res) => {
+        basicUtils.logger(TAG, `Hitting ${req.originalUrl}`)
+        if (global.mongoDbConnection) {
+            try {
+                const result = await servicePet.fetchAllFromPetCollection()
+                if (result) {
+                    if (result.err) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.VIEWALL_PET_ERR, { error: result.err })
+                    if (result.data && result.data.length > 0) return basicUtils.generateResponse(res, httpStatus.OK, `${constants.messages.VIEWALL_PET_SUCCESS} with ${result.data.length} records`, {pets: result.data})
+                    else return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.VIEWALL_PET_EMPTY)
+                }
+            } catch (error) {
+                return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.VIEWALL_PET_ERR, { error: "" + error })
+            }
+        }
+        else basicUtils.generateResponse(res, httpStatus.BAD_GATEWAY, constants.messages.DB_DOWN)
     },
 
     viewPet: (req, res) => {

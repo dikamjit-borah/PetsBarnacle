@@ -12,5 +12,10 @@ module.exports = {
         ADD_PET_SUCCESS: "Successfully updated pet data in database",
         ADD_PET_UPDATED: "Pet data already updated with latest records in database",
         ADD_PET_EMPTY: "No records found to update pet data in database",
+
+        VIEWALL_PET_ERR: "Error fetching pet data",
+        VIEWALL_PET_SUCCESS: "Successfully fetched pet data",
+        VIEWALL_PET_EMPTY: "No records found",
+
     }
 }

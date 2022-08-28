@@ -17,10 +17,8 @@ module.exports = {
                     }
                 }))
             )
-            
+
             upserted = result.upsertedCount ? result.upsertedCount : 0
-            console.log(upserted);
-            console.log("fsfj");
         } catch (error) {
             console.log(error);
             err = "" + error
@@ -29,5 +27,22 @@ module.exports = {
             upserted,
             err
         }
+    },
+
+    fetchAllFromPetCollection: async () => {
+        let data
+        let err
+        try {
+            data = await modelPet.find({})
+        } catch (error) {
+            console.log(error);
+            err = "" + error
+        }
+        return {
+            data,
+            err
+        }
+
+
     }
 }
