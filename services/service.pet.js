@@ -42,6 +42,21 @@ module.exports = {
             data,
             err
         }
+    },
+
+    fetchOneFromPetCollection: async (petId) => {
+        let data
+        let err
+        try {
+            data = await modelPet.find({petId})
+        } catch (error) {
+            console.log(error);
+            err = "" + error
+        }
+        return {
+            data,
+            err
+        }
 
 
     }

@@ -17,5 +17,10 @@ module.exports = {
         VIEWALL_PET_SUCCESS: "Successfully fetched pet data",
         VIEWALL_PET_EMPTY: "No records found",
 
+        VIEW_PET_ERR: "Error fetching pet details",
+        VIEW_PET_SUCCESS: "Successfully fetched pet details",
+        VIEW_PET_EMPTY: "No record found for the given pet id",
+        VIEW_PET_INVALID_ID: "Cannot search database for invalid pet id"
+
     }
 }
