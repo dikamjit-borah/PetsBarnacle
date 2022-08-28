@@ -105,8 +105,23 @@ module.exports = {
         else basicUtils.generateResponse(res, httpStatus.BAD_GATEWAY, constants.messages.DB_DOWN)
     },
 
-    deletePet: (req, res) => {
-        res.send("deletePet")
+    deletePet: async (req, res) => {
+        basicUtils.logger(TAG, `Hitting ${req.originalUrl}`)
+        const petId = req.params.id && req.params.id != "0" && !isNaN(req.params.id) ? req.params.id : ""
+        if (!petId) return basicUtils.generateResponse(res, httpStatus.BAD_REQUEST, constants.messages.PET_INVALID_ID)
+        if (global.mongoDbConnection && petId) {
+            try {
+                const result = await servicePet.deleteOneInPetCollection(petId)
+                if (result) {
+                    if (result.err) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, `${constants.messages.DEL_PET_ERR} with id ${petId}`, { error: result.err })
+                    if (result.isDeleted) return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.DEL_PET_SUCCESS)
+                    else return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.PET_EMPTY_ID)
+                }
+            } catch (error) {
+                return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.DEL_PET_ERR, { error: "" + error })
+            }
+        }
+        else basicUtils.generateResponse(res, httpStatus.BAD_GATEWAY, constants.messages.DB_DOWN)
     }
 
 }

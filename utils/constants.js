@@ -20,6 +20,9 @@ module.exports = {
         VIEW_PET_ERR: "Error fetching pet details",
         VIEW_PET_SUCCESS: "Successfully fetched pet details",
 
+        DEL_PET_ERR: "Error deleting pet",
+        DEL_PET_SUCCESS: "Successfully deleted pet",
+
         UPDATE_PET_ERR: "Error updating pet details",
         UPDATE_PET_SUCCESS: "Successfully updated details",
         UPDATE_PET_NONE: "Cannot update pet details with same data",

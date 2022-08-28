@@ -76,5 +76,21 @@ module.exports = {
             isUpdated,
             err
         }
+    },
+
+    deleteOneInPetCollection: async (petId) => {
+        let isDeleted = false
+        let err
+        try {
+            result = await modelPet.deleteOne({ petId })
+            isDeleted = result && result.deletedCount ? true : false
+        } catch (error) {
+            console.log(error);
+            err = "" + error
+        }
+        return {
+            isDeleted,
+            err
+        }
     }
 }
