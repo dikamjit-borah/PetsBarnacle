@@ -69,11 +69,30 @@ module.exports = {
 
     updatePet: async (req, res) => {
         basicUtils.logger(TAG, `Hitting ${req.originalUrl}`)
+
         const petId = req.params.id && req.params.id != "0" && !isNaN(req.params.id) ? req.params.id : ""
         if (!petId) return basicUtils.generateResponse(res, httpStatus.BAD_REQUEST, constants.messages.PET_INVALID_ID)
-        if (global.mongoDbConnection && petId) {
+
+        let petData = {
+
+        }
+
+        try {
+            const body = req.body ? req.body : ""
+            body && body.name ? petData['name'] = body.name : null
+            body && body.type ? petData['type'] = body.type : null
+            body && body.breed ? petData['breed'] = body.breed : null
+            body && body.age ? petData['age'] = body.age : null
+        } catch (error) {
+            console.log(error);
+            return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.PARSE_ERR)
+        }
+
+        if (!petData || !Object.keys(petData).length) return basicUtils.generateResponse(res, httpStatus.BAD_REQUEST, constants.messages.UPDATE_PET_NO_BODY)
+
+        if (global.mongoDbConnection && petId && petData) {
             try {
-                const result = await servicePet.updateOneInPetCollection(petId)
+                const result = await servicePet.updateOneInPetCollection(petId, petData)
                 if (result) {
                     if (result.err) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.UPDATE_PET_ERR, { error: result.err })
                     if (!result.isMatched) return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.PET_EMPTY_ID)

@@ -59,12 +59,12 @@ module.exports = {
         }
     },
 
-    updateOneInPetCollection: async (petId) => {
+    updateOneInPetCollection: async (petId, petData) => {
         let isMatched = false
         let isUpdated = false
         let err
         try {
-            result = await modelPet.updateOne({ petId }, {breed: "faaaaaaaaaadadad"})
+            result = await modelPet.updateOne({ petId }, petData)
             isMatched = result && result.matchedCount ? true : false
             isUpdated = result && result.modifiedCount ? true : false
         } catch (error) {
