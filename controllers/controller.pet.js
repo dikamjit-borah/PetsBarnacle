@@ -31,6 +31,12 @@ module.exports = {
         else basicUtils.generateResponse(res, httpStatus.BAD_GATEWAY, constants.messages.DB_DOWN)
     },
 
+    upload: async (req, res) => {
+        basicUtils.logger(TAG, `Hitting ${req.originalUrl}`)
+        console.log(`File Details ${JSON.stringify(req.file)}`);
+        return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.UPLOAD_PET_SUCCESS)
+    },
+
     viewAll: async (req, res) => {
         basicUtils.logger(TAG, `Hitting ${req.originalUrl}`)
         if (global.mongoDbConnection) {

@@ -28,6 +28,9 @@ module.exports = {
         UPDATE_PET_NONE: "Cannot update pet details with same data",
         UPDATE_PET_NO_BODY: "Please provide details to update the given pet id",
 
+        UPLOAD_PET_SUCCESS: "Pet file successfully uploaded",
+        UPLOAD_PET_FAIL: "Pet file could not be uploaded",
+
         PET_EMPTY_ID: "No record found for the given pet id",
         PET_INVALID_ID: "Please provide a valid pet id",
 
